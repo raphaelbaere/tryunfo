@@ -94,7 +94,7 @@ export default class Form extends Component {
             <option>muito raro</option>
           </select>
         </label>
-        { !hasTrunfo ? (
+        { hasTrunfo === false ? (
           <label htmlFor="trunfo-input">
             É Super Trunfo?
             <input

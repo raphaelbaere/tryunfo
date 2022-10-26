@@ -12,9 +12,7 @@ class App extends React.Component {
     cardAttr3: '',
     cardRare: '',
     cardTrunfo: false,
-    onInputChange: this.onInputChange,
     isSaveButtonDisabled: true,
-    onSaveButtonClick: this.onSaveButtonClick,
     deck: [],
     hasTrunfo: false,
   };
@@ -23,17 +21,17 @@ class App extends React.Component {
     const { cardName, cardImage,
       cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardRare } = this.state;
-    const maxSumAttr = 210;
-    const maxUniqueAttr = 90;
     const attr1 = parseInt(cardAttr1, 10);
     const attr2 = parseInt(cardAttr2, 10);
     const attr3 = parseInt(cardAttr3, 10);
-    const isLengthZero = cardName.length === 0
-     || cardDescription.length === 0 || cardImage.length === 0 || cardRare.length === 0;
+    const maxSumAttr = 210;
+    const maxUniqueAttr = 90;
+    const isLengthZero = cardName.length === 0 || cardDescription.length === 0
+    || cardImage.length === 0 || cardRare.length === 0;
     const isValidSum = attr1 + attr2 + attr3 <= maxSumAttr;
     const isNegative = attr1 < 0 || attr2 < 0 || attr3 < 0;
-    const isBiggerThan90 = attr1 > maxUniqueAttr
-     || attr2 > maxUniqueAttr || attr3 > maxUniqueAttr;
+    const isBiggerThan90 = attr1 > maxUniqueAttr || attr2 > maxUniqueAttr
+    || attr3 > maxUniqueAttr;
     if (!isLengthZero && isValidSum && !isNegative && !isBiggerThan90) {
       this.setState({
         isSaveButtonDisabled: false,
@@ -96,11 +94,9 @@ class App extends React.Component {
   };
 
   render() {
-    const { cardName, cardImage,
-      cardDescription, cardAttr1,
-      cardAttr2, cardAttr3, cardRare,
-      cardTrunfo, onInputChange, isSaveButtonDisabled,
-      onSaveButtonClick, hasTrunfo } = this.state;
+    const { cardName, cardImage, cardDescription, cardAttr1,
+      cardAttr2, cardAttr3, cardRare, cardTrunfo,
+      isSaveButtonDisabled, hasTrunfo } = this.state;
     return (
       <div>
         <Form
@@ -112,9 +108,9 @@ class App extends React.Component {
           cardAttr3={ cardAttr3 }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
-          onInputChange={ onInputChange }
+          onInputChange={ this.onInputChange }
           isSaveButtonDisabled={ isSaveButtonDisabled }
-          onSaveButtonClick={ onSaveButtonClick }
+          onSaveButtonClick={ this.onSaveButtonClick }
           hasTrunfo={ hasTrunfo }
         />
         <Card
