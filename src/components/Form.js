@@ -34,6 +34,8 @@ export default class Form extends Component {
           <input
             id="attr1-input"
             type="number"
+            min="0"
+            max="90"
             name="cardAttr1"
             value={ cardAttr1 }
             onChange={ onInputChange }
@@ -45,6 +47,8 @@ export default class Form extends Component {
           <input
             id="attr2-input"
             type="number"
+            min="0"
+            max="90"
             name="cardAttr2"
             value={ cardAttr2 }
             onChange={ onInputChange }
@@ -55,6 +59,8 @@ export default class Form extends Component {
           atributo 3
           <input
             id="attr3-input"
+            min="0"
+            max="90"
             type="number"
             name="cardAttr3"
             value={ cardAttr3 }
@@ -93,6 +99,7 @@ export default class Form extends Component {
             id="trunfo-input"
             type="checkbox"
             name="cardTrunfo"
+            checked={ cardTrunfo }
             onChange={ onInputChange }
             data-testid="trunfo-input"
           />
