@@ -15,6 +15,7 @@ class App extends React.Component {
     isSaveButtonDisabled: true,
     deck: [],
     hasTrunfo: false,
+    hasDeleteButton: false,
   };
 
   validateInfo = () => {
@@ -59,6 +60,9 @@ class App extends React.Component {
   };
 
   onSaveButtonClick = () => {
+    this.setState({
+      hasDeleteButton: true,
+    });
     const { cardName, cardDescription,
       cardImage, cardAttr1, cardAttr2,
       cardAttr3, cardRare, cardTrunfo, deck } = this.state;
@@ -93,8 +97,25 @@ class App extends React.Component {
     });
   };
 
-  showCards = () => {
+  onButtonDeleteClick = (event) => {
     const { deck } = this.state;
+    const cardNameToBeRemoved = event.target.parentNode.firstChild.innerHTML;
+    const indexOfCardToBeRemoved = deck.findIndex((card) => (
+      card.cardName === cardNameToBeRemoved));
+    if (deck[indexOfCardToBeRemoved].cardTrunfo) {
+      this.setState({
+        hasTrunfo: false,
+      });
+    }
+    console.log(indexOfCardToBeRemoved);
+    deck.splice(indexOfCardToBeRemoved, 1);
+    this.setState({
+      deck,
+    });
+  };
+
+  showCards = () => {
+    const { deck, hasDeleteButton } = this.state;
     const allDeck = deck.map((card) => (
       <Card
         key={ card.cardName }
@@ -106,6 +127,8 @@ class App extends React.Component {
         cardAttr3={ card.cardAttr3 }
         cardRare={ card.cardRare }
         cardTrunfo={ card.cardTrunfo }
+        hasDeleteButton={ hasDeleteButton }
+        onButtonDeleteClick={ this.onButtonDeleteClick }
       />));
     return allDeck;
   };

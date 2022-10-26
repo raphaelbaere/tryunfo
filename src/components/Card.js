@@ -5,7 +5,7 @@ export default class Card extends Component {
   render() {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage, cardRare,
-      cardTrunfo } = this.props;
+      cardTrunfo, hasDeleteButton, onButtonDeleteClick } = this.props;
     return (
       <div>
         <h2 data-testid="name-card">{ cardName }</h2>
@@ -16,6 +16,15 @@ export default class Card extends Component {
         <img data-testid="image-card" src={ cardImage } alt={ cardName } />
         <p data-testid="rare-card">{ cardRare }</p>
         { cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : ''}
+        { hasDeleteButton
+          ? (
+            <button
+              type="button"
+              data-testid="delete-button"
+              onClick={ onButtonDeleteClick }
+            >
+              Excluir
+            </button>) : ''}
       </div>
     );
   }
@@ -30,4 +39,11 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  hasDeleteButton: PropTypes.bool,
+  onButtonDeleteClick: PropTypes.func,
+};
+
+Card.defaultProps = {
+  hasDeleteButton: false,
+  onButtonDeleteClick: () => {},
 };
