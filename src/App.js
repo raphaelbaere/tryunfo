@@ -93,6 +93,23 @@ class App extends React.Component {
     });
   };
 
+  showCards = () => {
+    const { deck } = this.state;
+    const allDeck = deck.map((card) => (
+      <Card
+        key={ card.cardName }
+        cardName={ card.cardName }
+        cardImage={ card.cardImage }
+        cardDescription={ card.cardDescription }
+        cardAttr1={ card.cardAttr1 }
+        cardAttr2={ card.cardAttr2 }
+        cardAttr3={ card.cardAttr3 }
+        cardRare={ card.cardRare }
+        cardTrunfo={ card.cardTrunfo }
+      />));
+    return allDeck;
+  };
+
   render() {
     const { cardName, cardImage, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardRare, cardTrunfo,
@@ -123,6 +140,10 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <div>
+          <h1>Seu baralho</h1>
+          {this.showCards()}
+        </div>
       </div>
     );
   }
