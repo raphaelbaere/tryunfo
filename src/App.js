@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import SearchNameInput from './components/SearchNameInput';
 
 class App extends React.Component {
   state = {
@@ -16,6 +17,7 @@ class App extends React.Component {
     deck: [],
     hasTrunfo: false,
     hasDeleteButton: false,
+    searchCardName: '',
   };
 
   validateInfo = () => {
@@ -107,7 +109,6 @@ class App extends React.Component {
         hasTrunfo: false,
       });
     }
-    console.log(indexOfCardToBeRemoved);
     deck.splice(indexOfCardToBeRemoved, 1);
     this.setState({
       deck,
@@ -133,10 +134,27 @@ class App extends React.Component {
     return allDeck;
   };
 
+  validaSearch = () => {
+    const { searchCardName, deck } = this.state;
+    const filteredDeck = deck.filter((card) => card.cardName.includes(searchCardName));
+    this.setState({
+      deck: filteredDeck,
+    });
+  };
+
+  onInputSearchChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    }, () => {
+      this.validaSearch();
+    });
+  };
+
   render() {
     const { cardName, cardImage, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardRare, cardTrunfo,
-      isSaveButtonDisabled, hasTrunfo } = this.state;
+      isSaveButtonDisabled, hasTrunfo, searchCardName } = this.state;
     return (
       <div>
         <Form
@@ -165,6 +183,10 @@ class App extends React.Component {
         />
         <div>
           <h1>Seu baralho</h1>
+          <SearchNameInput
+            searchCardName={ searchCardName }
+            onInputSearchChange={ this.onInputSearchChange }
+          />
           {this.showCards()}
         </div>
       </div>
