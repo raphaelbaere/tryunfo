@@ -3,6 +3,7 @@ import Form from './components/Form';
 import Card from './components/Card';
 import SearchNameInput from './components/SearchNameInput';
 import SearchRarityInput from './components/SearchRarityInput';
+import SearchTrunfoInput from './components/SearchTrunfoInput';
 
 class App extends React.Component {
   state = {
@@ -20,6 +21,8 @@ class App extends React.Component {
     hasDeleteButton: false,
     searchCardName: '',
     searchCardRarity: 'todas',
+    disableSearch: false,
+    searchCardTrunfo: '',
   };
 
   validateInfo = () => {
@@ -155,6 +158,15 @@ class App extends React.Component {
     });
   };
 
+  validaSearchTrunfo = () => {
+    const { deck } = this.state;
+    const filteredDeck = deck.filter((card) => card.cardTrunfo === true);
+    this.setState({
+      disableSearch: true,
+      deck: filteredDeck,
+    });
+  };
+
   onInputSearchChange = ({ target }) => {
     const { name, value } = target;
     this.setState({
@@ -173,10 +185,20 @@ class App extends React.Component {
     });
   };
 
+  onInputSearchTrunfoChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    }, () => {
+      this.validaSearchTrunfo();
+    });
+  };
+
   render() {
     const { cardName, cardImage, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardRare, cardTrunfo,
-      isSaveButtonDisabled, hasTrunfo, searchCardName, searchCardRarity } = this.state;
+      isSaveButtonDisabled, hasTrunfo, searchCardName,
+      searchCardRarity, disableSearch, searchCardTrunfo } = this.state;
     return (
       <div>
         <Form
@@ -208,10 +230,16 @@ class App extends React.Component {
           <SearchNameInput
             searchCardName={ searchCardName }
             onInputSearchChange={ this.onInputSearchChange }
+            disableSearch={ disableSearch }
           />
           <SearchRarityInput
             searchCardRarity={ searchCardRarity }
             onInputSearchRarityChange={ this.onInputSearchRarityChange }
+            disableSearch={ disableSearch }
+          />
+          <SearchTrunfoInput
+            searchCardTrunfo={ searchCardTrunfo }
+            onInputSearchTrunfoChange={ this.onInputSearchTrunfoChange }
           />
           {this.showCards()}
         </div>
@@ -219,5 +247,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class SearchRarityInput extends Component {
   render() {
-    const { searchCardRarity, onInputSearchRarityChange } = this.props;
+    const { searchCardRarity, onInputSearchRarityChange, disableSearch } = this.props;
     return (
       <label htmlFor="searchRarity-input">
         Filtro de busca por raridade
@@ -13,6 +13,7 @@ export default class SearchRarityInput extends Component {
           name="searchCardRarity"
           value={ searchCardRarity }
           onChange={ onInputSearchRarityChange }
+          disabled={ disableSearch }
         >
           <option>todas</option>
           <option>normal</option>
@@ -27,4 +28,5 @@ export default class SearchRarityInput extends Component {
 SearchRarityInput.propTypes = {
   searchCardRarity: PropTypes.string.isRequired,
   onInputSearchRarityChange: PropTypes.func.isRequired,
+  disableSearch: PropTypes.bool.isRequired,
 };
