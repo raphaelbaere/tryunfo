@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import SearchNameInput from './components/SearchNameInput';
+import SearchRarityInput from './components/SearchRarityInput';
 
 class App extends React.Component {
   state = {
@@ -18,6 +19,7 @@ class App extends React.Component {
     hasTrunfo: false,
     hasDeleteButton: false,
     searchCardName: '',
+    searchCardRarity: 'todas',
   };
 
   validateInfo = () => {
@@ -134,9 +136,20 @@ class App extends React.Component {
     return allDeck;
   };
 
-  validaSearch = () => {
+  validaSearchName = () => {
     const { searchCardName, deck } = this.state;
     const filteredDeck = deck.filter((card) => card.cardName.includes(searchCardName));
+    this.setState({
+      deck: filteredDeck,
+    });
+  };
+
+  validaSearchRarity = () => {
+    const { searchCardRarity, deck } = this.state;
+    if (searchCardRarity === 'todas') {
+      return;
+    }
+    const filteredDeck = deck.filter((card) => card.cardRare === searchCardRarity);
     this.setState({
       deck: filteredDeck,
     });
@@ -147,14 +160,23 @@ class App extends React.Component {
     this.setState({
       [name]: value,
     }, () => {
-      this.validaSearch();
+      this.validaSearchName();
+    });
+  };
+
+  onInputSearchRarityChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    }, () => {
+      this.validaSearchRarity();
     });
   };
 
   render() {
     const { cardName, cardImage, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardRare, cardTrunfo,
-      isSaveButtonDisabled, hasTrunfo, searchCardName } = this.state;
+      isSaveButtonDisabled, hasTrunfo, searchCardName, searchCardRarity } = this.state;
     return (
       <div>
         <Form
@@ -186,6 +208,10 @@ class App extends React.Component {
           <SearchNameInput
             searchCardName={ searchCardName }
             onInputSearchChange={ this.onInputSearchChange }
+          />
+          <SearchRarityInput
+            searchCardRarity={ searchCardRarity }
+            onInputSearchRarityChange={ this.onInputSearchRarityChange }
           />
           {this.showCards()}
         </div>
