@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +11,131 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fccc7e;
+}
+
+header {
+  background-color: #fccc7e;
+  height: 30vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  flex-wrap: wrap;
+}
+
+.form-and-card-container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  background-color: #fc9c04;
+  height: 350px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 262px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-image: url('./narutocard.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 5;
+  background-color: #C5B8AF;
+}
+
+.card-img {
+  order: 2;
+  width: 255px;
+  padding-top: 40px;
+  padding-left: 0px;
+  z-index: -1;
+}
+
+.card-rare {
+  order: 9;
+}
+
+.card-trunfo {
+  order: 8;
+}
+
+.card-attr {
+  order: 7;
+}
+
+.card-attrs {
+  display: flex;
+  order: 3;
+}
+
+.card-desc {
+  order: 8;
+  font-style: italic;
+  width: 80%;
+}
+
+.card-name {
+  order: 1;
+  text-align: right;
+  margin-top: -42px;
+  padding-right: 15px;
+  align-self: flex-end;
+  font-size: 22px;
+}
+
+.deck {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fc9c04;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.deck h1 {
+  width: 100%;
+  align-self: center;
+  text-align: center;
+}
+
+.logo {
+  border-radius: 15%;
+  margin: 0;
+}
+
+.naruto {
+  margin: 0;
+  align-self: flex-end;
+  width: 190px;
+}
+
+footer {
+  position: fixed;
+  bottom: 5px;
+  width: 100vw;
+}
+
+footer p {
+  text-align: center;
+  color: #835001;
 }

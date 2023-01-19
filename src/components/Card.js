@@ -7,19 +7,34 @@ export default class Card extends Component {
       cardAttr2, cardAttr3, cardImage, cardRare,
       cardTrunfo, hasDeleteButton, onButtonDeleteClick } = this.props;
     return (
-      <div>
-        <h2 data-testid="name-card">{ cardName }</h2>
-        <p data-testid="description-card">{ cardDescription }</p>
-        <p data-testid="attr1-card">{ cardAttr1 }</p>
-        <p data-testid="attr2-card">{ cardAttr2 }</p>
-        <p data-testid="attr3-card">{ cardAttr3 }</p>
-        <img data-testid="image-card" src={ cardImage } alt={ cardName } />
-        <p data-testid="rare-card">{ cardRare }</p>
-        { cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : ''}
+      <div className="card-container">
+        <h2 className="card-name" data-testid="name-card">{ cardName }</h2>
+        <p className="card-desc" data-testid="description-card">{ cardDescription }</p>
+        <div className="card-attrs">
+          <p className="card-attr" data-testid="attr1-card">{ cardAttr1 }</p>
+          <p className="card-attr" data-testid="attr2-card">{ cardAttr2 }</p>
+          <p className="card-attr" data-testid="attr3-card">{ cardAttr3 }</p>
+        </div>
+        <img
+          className="card-img"
+          data-testid="image-card"
+          src={ cardImage }
+          alt={ cardName }
+        />
+        <p className="card-rare" data-testid="rare-card">{ cardRare }</p>
+        { cardTrunfo
+          ? (
+            <p
+              className="card-trunfo"
+              data-testid="trunfo-card"
+            >
+              Super Trunfo
+            </p>) : ''}
         { hasDeleteButton
           ? (
             <button
               type="button"
+              className="card-delete-button"
               data-testid="delete-button"
               onClick={ onButtonDeleteClick }
             >

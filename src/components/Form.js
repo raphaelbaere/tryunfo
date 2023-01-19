@@ -31,7 +31,7 @@ export default class Form extends Component {
           />
         </label>
         <label htmlFor="attr1-input">
-          atributo 1
+          Ninjutsu
           <input
             id="attr1-input"
             type="number"
@@ -44,7 +44,7 @@ export default class Form extends Component {
           />
         </label>
         <label htmlFor="attr2-input">
-          atributo 2
+          Taijutsu
           <input
             id="attr2-input"
             type="number"
@@ -57,7 +57,7 @@ export default class Form extends Component {
           />
         </label>
         <label htmlFor="attr3-input">
-          atributo 3
+          Genjutsu
           <input
             id="attr3-input"
             min="0"

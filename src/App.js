@@ -53,17 +53,11 @@ class App extends React.Component {
 
   onInputChange = ({ target }) => {
     const { name, value } = target;
-    if (name === 'cardTrunfo' && value === 'on') {
-      this.setState({
-        [name]: true,
-      });
-    } else {
-      this.setState({
-        [name]: value,
-      }, () => {
-        this.validateInfo();
-      });
-    }
+    this.setState({
+      [name]: (name === 'cardTrunfo' ? true : value),
+    }, () => {
+      this.validateInfo();
+    });
   };
 
   onSaveButtonClick = () => {
@@ -200,32 +194,34 @@ class App extends React.Component {
       isSaveButtonDisabled, hasTrunfo, searchCardName,
       searchCardRarity, disableSearch, searchCardTrunfo } = this.state;
     return (
-      <div>
-        <Form
-          cardName={ cardName }
-          cardImage={ cardImage }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          onInputChange={ this.onInputChange }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onSaveButtonClick={ this.onSaveButtonClick }
-          hasTrunfo={ hasTrunfo }
-        />
-        <Card
-          cardName={ cardName }
-          cardImage={ cardImage }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        <div>
+      <main>
+        <div className="form-and-card-container">
+          <Form
+            cardName={ cardName }
+            cardImage={ cardImage }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            onInputChange={ this.onInputChange }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            hasTrunfo={ hasTrunfo }
+          />
+          <Card
+            cardName={ cardName }
+            cardImage={ cardImage }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+          />
+        </div>
+        <div className="deck">
           <h1>Seu baralho</h1>
           <SearchNameInput
             searchCardName={ searchCardName }
@@ -243,7 +239,7 @@ class App extends React.Component {
           />
           {this.showCards()}
         </div>
-      </div>
+      </main>
     );
   }
 }
